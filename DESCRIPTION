@@ -1,13 +1,13 @@
 Package: SDaA
 Type: Package
 Title: Sampling: Design and Analysis
-Version: 0.1
-Date: 2008-09-15
+Version: 0.1-1
+Date: 2009-02-27
 Author: Tobias Verbeke
-Maintainer: Tobias Verbeke <tobias.verbeke@gmail.com>
+Maintainer: Tobias Verbeke <tobias.verbeke@openanalytics.be>
 Description: Functions and Datasets from Lohr, S. (1999), Sampling:
     Design and Analysis, Duxbury.
-Depends: survey, ggplot2, roxygen
+Depends: survey, ggplot2 (>= 0.8.2), roxygen
 License: GPL-3
 LazyData: Yes
 Collate: 'agpop.R' 'agsrs.R' 'agstrat.R' 'anthrop.R' 'anthsrs.R'
@@ -17,4 +17,4 @@ Collate: 'agpop.R' 'agsrs.R' 'agstrat.R' 'anthrop.R' 'anthsrs.R'
     'ozone.R' 'samples.R' 'seals.R' 'selectrs.R' 'statepop.R'
     'statepps.R' 'syc.R' 'teachers.R' 'teachmi.R' 'teachnr.R'
     'winter.R'
-Packaged: Thu Dec  4 11:06:41 2008; tobias
+Packaged: Fri Feb 27 20:29:28 2009; tobias
