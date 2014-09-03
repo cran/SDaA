@@ -1,156 +1,99 @@
-\documentclass[article, 11pt, oneside]{memoir}
-\usepackage{Sweave}
-\usepackage[OT1]{fontenc}
-\usepackage[utf8]{inputenc}
-\begin{document}
+### R code from vignette source 'SDaA_using_survey.Rnw'
+### Encoding: UTF-8
 
-% \VignetteIndexEntry{SDaA}
-
-\title{Reproduction of Analyses in Lohr (1999)\\ 
-       using the \texttt{survey} package}
-\author{Tobias Verbeke}
-\date{2011-03-21}
-\maketitle
-
-\tableofcontents
-
-<<config, echo=FALSE>>=
+###################################################
+### code chunk number 1: config
+###################################################
 	options(width=65)
-@
 
 
-\chapter{Introduction} % Chapter 1
-
-The Introduction chapter does not contain any numerical
-examples demonstrating survey methodology. Before 
-reproducing the analyses of the following chapters, 
-we load the \texttt{SDaA} package as well as the \texttt{survey}
-
-<<loadPkg>>=
+###################################################
+### code chunk number 2: loadPkg
+###################################################
   library(SDaA)
   library(survey)
-@
 
 
-The \texttt{survey} package is loaded as well as it was specified
-as a dependency of the \texttt{SDaA} package.
-
-\chapter{Simple Probability Samples} % Chapter 2
-
-\chapter{Ratio and Regression Estimation} % Chapter 3
-
-\section{Ratio Estimation}
-
-
-<<>>=
+###################################################
+### code chunk number 3: SDaA_using_survey.Rnw:45-49
+###################################################
   ### Example 3.2, p. 63 
   agsrsDesign <- svydesign(ids=~1, weights = ~1, data = agsrs)
   svyratio(numerator = ~acres92, denominator = ~acres87, 
       design = agsrsDesign) # proportion B hat
-@
 
 
-\begin{figure}
-<<acreagetwoyears, fig=TRUE, include=FALSE, keep.source=TRUE>>=
+###################################################
+### code chunk number 4: acreagetwoyears
+###################################################
   ### part of Example 3.2, p. 64
   plot(I(acres92/10^6) ~ I(acres87/10^6), 
       xlab = "Millions of Acres Devoted to Farms (1987)", 
       ylab = "Millions of Acres Devoted to Farms (1992)", data = agsrs)
   abline(lm(I(acres92/10^6) ~ 0 + I(acres87/10^6), # through the origin 
           data = agsrs), col = "red", lwd = 2)
-@
-\includegraphics{SDaA_using_survey-acreagetwoyears}
-\caption{Figure 3.1, p. 64}
-\end{figure}
 
 
-<<seedlingData>>=
+###################################################
+### code chunk number 5: seedlingData
+###################################################
   ### Example 3.5, p. 72, table 3.3
   seedlings <- data.frame(tree = 1:10, 
       x = c(1, 0, 8, 2, 76, 60, 25, 2, 1, 31),
       y = c(0, 0, 1, 2, 10, 15, 3, 2, 1, 27))
   names(seedlings) <- c("tree", "x", "y")
-@
 
-% TODO cast into a appropriate data frame to 
-%      specify a cluster design (tree IDs *and* seedling IDs)
 
-\begin{figure}
-<<seedlingsplot, fig=TRUE, include=FALSE, keep.source=TRUE>>=
+###################################################
+### code chunk number 6: seedlingsplot
+###################################################
   plot(y ~ x, data = seedlings, xlab = "Seedlings Alive (March 1992)",
       ylab = "Seedlings That Survived (February 1994)")
   # abline(lm(y ~ 0 + x, data = seedlings), lwd = 2, col = "red")
   # TODO: add proper abline
-@
-\includegraphics{SDaA_using_survey-acresboxplot}
-\caption{Figure 3.4, p. 73}
-\end{figure}
 
 
-
-\section{Regression Estimation}
-
-<<>>=
+###################################################
+### code chunk number 7: SDaA_using_survey.Rnw:93-99
+###################################################
   ### Example 3.6, p. 75
   pf <- data.frame(photo = c(10, 12, 7, 13, 13, 6, 17, 
           16, 15, 10, 14, 12, 10, 5,
           12, 10, 10, 9, 6, 11, 7, 9, 11, 10, 10),
       field = c(15, 14, 9, 14, 8, 5, 18, 15, 13, 15, 11, 15, 12,
           8, 13, 9, 11, 12, 9, 12, 13, 11, 10, 9, 8))
-@
 
 
-
-\section{Estimation in Domains}
-
-\section{Models for Ratio and Regression Estimation}
-
-<<modelreg>>=
+###################################################
+### code chunk number 8: modelreg
+###################################################
 	### Example 3.9, p. 83
   recacr87 <- agsrs$acres87
   recacr87[recacr87 > 0] <- 1/recacr87[recacr87 > 0] # cf. p. 450
   model1 <- lm(acres92 ~ 0 + acres87, weights = recacr87, data = agsrs)
   summary(model1)
-@
 
 
-\begin{figure}
-<<modelregplot, fig=TRUE, include=FALSE, keep.source=TRUE>>=
+###################################################
+### code chunk number 9: modelregplot
+###################################################
   ### Figure 3.6, p. 85
   wtresid <- resid(model1) / sqrt(agsrs$acres87) 
   plot(wtresid ~ I(agsrs$acres87/10^6), 
       xlab = "Millions of Acres Devoted to Farms (1987)",
       ylab = "Weighted Residuals")
-@
-\includegraphics{SDaA_using_survey-modelregplot}
-\caption{Figure 3.6, p. 85}
-\end{figure}
 
 
-
-
-
-
-\chapter{Stratified Sampling} % Chapter 4
-
-\begin{figure}
-<<acresboxplot, fig=TRUE, include=FALSE, keep.source=TRUE>>=
+###################################################
+### code chunk number 10: acresboxplot
+###################################################
 	boxplot(acres92/10^6 ~ region, xlab = "Region", 
       ylab = "Millions of Acres", data = agstrat)
-@
-\includegraphics{SDaA_using_survey-acresboxplot}
-\caption{Figure 4.1, p. 97}
-\end{figure}
 
-\chapter{Cluster Sampling with Equal Probabilities} % Chapter 5
 
-\section{Notation for Cluster Sampling}
-
-No analyses contained in this section. 
-
-\section{One-Stage Cluster Sampling}
-
-<<gpaex>>=
+###################################################
+### code chunk number 11: gpaex
+###################################################
   ### Example 5.2, p. 137 middle
   GPA <- cbind(expand.grid(1:4, 1:5), 
       gpa = c(3.08, 2.60, 3.44, 3.04, 2.36, 3.04, 3.28, 2.68, 2.00, 2.56, 
@@ -165,112 +108,108 @@ No analyses contained in this section.
   # gpa 1130.4 67.167
   
   # Stata results: 1130.4   67.16666 ---> corresponds perfectly
-@
 
-\section{Two-Stage Cluster Sampling}
 
-<<fig=TRUE>>=
+###################################################
+### code chunk number 12: SDaA_using_survey.Rnw:172-175
+###################################################
   ### Figure 5.3
 	plot(volume ~ clutch, xlim = c(0,200), pch=19, data = coots,
       xlab = "Clutch Number", ylab = "Egg Volume")
-@
 
-<<fig=TRUE>>=
+
+###################################################
+### code chunk number 13: SDaA_using_survey.Rnw:178-181
+###################################################
   ### Figure 5.3
   plot(volume ~ clutch, xlim = c(0,200), pch=19, data = coots,
       xlab = "Clutch Number", ylab = "Egg Volume")
-@
 
-% Figure 5.4 seems a good plot to test the grammar of graphics
-% (sorting statistic, mean statistic etc.)
-\chapter{Sampling with Unequal Probabilities} % Chapter 6
 
-% cf. 
-% http://statistics.ats.ucla.edu/stat/stata/examples/lohr/lohrstata6.htm
-%
-
-<<readStatepop>>=
+###################################################
+### code chunk number 14: readStatepop
+###################################################
   data(statepop)
   statepop$psi <- statepop$popn / 255077536
-@
 
-<<fig=TRUE>>=
+
+###################################################
+### code chunk number 15: SDaA_using_survey.Rnw:197-201
+###################################################
 	### page 191, figure 6.1
   plot(phys ~ psi, data = statepop, 
        xlab = expression(paste(Psi[i], " for County")),
        ylab = "Physicians in County (in thousands)")
-@
 
-% TODO aanvullen met rest van gegevens op pagina
 
-\chapter{Complex Surveys} % Chapter 7
-
-\section{Estimating a Distribution Function}
-
-<<fig=TRUE>>=
+###################################################
+### code chunk number 16: SDaA_using_survey.Rnw:210-215
+###################################################
 	### Figure 7.1
   data(htpop)
   popecdf <- ecdf(htpop$height)
   plot(popecdf, do.points = FALSE, ylab = "F(y)", 
        xlab = "Height Value, y")
-@
 
-<<fig=TRUE>>=
+
+###################################################
+### code chunk number 17: SDaA_using_survey.Rnw:218-223
+###################################################
   ### Figure 7.2
   minht <- min(htpop$height)
   breaks <- c(minht-1, seq(from = minht, to = max(htpop$height), by = 1))
   hist(htpop$height, ylab = "f(y)", breaks = breaks, 
        xlab = "Height Value, y", freq = FALSE)
-@
 
-<<fig=TRUE>>=
+
+###################################################
+### code chunk number 18: SDaA_using_survey.Rnw:226-230
+###################################################
   ### Figure 7.3
   data(htsrs)
   hist(htsrs$height, ylab = "Relative Frequency", 
        xlab = "Height (cm)", freq = FALSE)
-@
 
-% TODO Figure 7.3 can be improved (change number of breaks) 
 
-<<fig=TRUE>>=
+###################################################
+### code chunk number 19: SDaA_using_survey.Rnw:235-239
+###################################################
   ### Figure 7.4
   data(htstrat)
   hist(htstrat$height, ylab = "Relative Frequency", 
       xlab = "Height (cm)", freq = FALSE)
-@
 
-<<fig=TRUE>>=
+
+###################################################
+### code chunk number 20: SDaA_using_survey.Rnw:242-247
+###################################################
 	### Figure 7.5 (a)
   minht <- min(htstrat$height)
   breaks <- c(minht-1, seq(from = minht, to = max(htstrat$height), by = 1))
   hist(htstrat$height, ylab = expression(hat(f)(y)), breaks = breaks, 
        xlab = "Height Value, y", freq = FALSE)
-@
 
-<<fig=TRUE>>=
+
+###################################################
+### code chunk number 21: SDaA_using_survey.Rnw:250-254
+###################################################
   ### Figure 7.5 (b)
   stratecdf <- ecdf(htstrat$height)
   plot(stratecdf, do.points = FALSE, ylab = expression(hat(F)(y)), 
        xlab = "Height Value, y")
-@
 
-\section{Plotting Data from a Complex Survey}
 
-<<fig=TRUE>>=
+###################################################
+### code chunk number 22: SDaA_using_survey.Rnw:259-262
+###################################################
 	### Figure 7.6
   data(syc)
   hist(syc$age, freq = FALSE, xlab = "Age")
-@
 
-% TODO add Figure 7.7 (?)
 
-Note that in its current implementation, \texttt{svyboxplot} will
-only plot minimum and maximum as outliers if they are situated 
-outside the whiskers. Other outliers are not plotted 
-(see \texttt{?svyboxplot}). This explains the minor difference with
-Figure 7.8 on p. 237 of Lohr (1999).
-
-<<fig=TRUE>>=
+###################################################
+### code chunk number 23: SDaA_using_survey.Rnw:273-286
+###################################################
   ### Figure 7.8
   sycdesign <- svydesign(ids= ~ psu, strata = ~ stratum,
      data = syc, weights=~finalwt)
@@ -284,61 +223,41 @@ Figure 7.8 on p. 237 of Lohr (1999).
   oo <- options(survey.lonely.psu = "certainty")
   svyboxplot(age ~ factor(stratum), design = sycdesign) # mind the factor
   options(oo)
-@
 
-This kind of plot is particularly easy to formulate
-in the grammar of graphics, i.e. using the \texttt{ggplot2}
-package~:
 
-<<fig=TRUE>>=
+###################################################
+### code chunk number 24: SDaA_using_survey.Rnw:293-298
+###################################################
   ### Figure 7.9
   library(ggplot2)
   p <- ggplot(syc, aes(x = factor(stratum), y = factor(age)))
   g <- p + stat_sum(aes(group=1, weight = finalwt, size = ..n..)) 
   print(g)
-@
 
-% TODO: check that it is really the sum of finalwt that is displayed     
-     
-Note that in its current implementation, \texttt{svyboxplot} will
-only plot minimum and maximum as outliers if they are situated 
-outside the whiskers. Other outliers are not plotted 
-(see \texttt{?svyboxplot}). This explains the minor difference with
-Figure 7.10 on p. 238 of Lohr (1999).
- 
-     
-<<fig=TRUE>>=
+
+###################################################
+### code chunk number 25: SDaA_using_survey.Rnw:310-315
+###################################################
 	### Figure 7.10
   oo <- options(survey.lonely.psu = "certainty")
   sycstrat5 <- subset(sycdesign, stratum == 5)
   svyboxplot(age ~ factor(psu), design = sycstrat5)
   options(oo)
-@
 
-<<fig=TRUE>>=
+
+###################################################
+### code chunk number 26: SDaA_using_survey.Rnw:318-323
+###################################################
   ### Figure 7.11
   sycstrat5df <- subset(syc, stratum == 5)
   p <- ggplot(sycstrat5df, aes(x = factor(psu), y = factor(age)))
   g <- p + stat_sum(aes(group=1, weight = finalwt, size = ..n..)) 
   print(g)
-@
-
-\chapter{Nonresponse} % Chapter 8
-
-\chapter{Variance Estimation in Complex Surveys} % Chapter 9
-
-\section{Linearization (Taylor Series) Methods}
-\section{Random Group Methods}
-\section{Resampling and Replication Methods}
-\section{Generalized Variance Functions}
-\section{Confidence Intervals}
 
 
-\chapter{Categorical Data Analysis in Complex Surveys} % Chapter 10
-
-\section{Chi-Square Tests with Multinomial Sampling}
-
-<<>>=
+###################################################
+### code chunk number 27: SDaA_using_survey.Rnw:341-348
+###################################################
   ### Example 10.1
   hh <- rbind(c(119, 188),
               c(88, 105))
@@ -346,12 +265,11 @@ Figure 7.10 on p. 238 of Lohr (1999).
   colnames(hh) <- c("computerYes", "computerNo")
   addmargins(hh)
   chisq.test(hh, correct = FALSE)  # OK      
-@
-
-% TODO: add G^2
 
 
-<<>>=
+###################################################
+### code chunk number 28: SDaA_using_survey.Rnw:354-364
+###################################################
 	### Example 10.2 (nursing students and tutors)
   nst <- rbind(c(46, 222),
                c(41, 109),
@@ -362,9 +280,11 @@ Figure 7.10 on p. 238 of Lohr (1999).
       "psychiatricTutor")
   addmargins(nst)
   chisq.test(nst, correct = FALSE) # OK        
-@
 
-<<>>=
+
+###################################################
+### code chunk number 29: SDaA_using_survey.Rnw:367-376
+###################################################
 	### Example 10.3 (Air Force Pilots)
   afp <- data.frame(nAccidents = 0:7, 
                     nPilots = c(12475, 4117, 1016, 269, 53, 14, 6, 2))
@@ -374,13 +294,11 @@ Figure 7.10 on p. 238 of Lohr (1999).
   observed <- afp$nPilots
   expected <- dpois(0:7, lambda = lambdahat) * sum(afp$nPilots)
   sum((observed - expected)^2 / expected) # NOT OK
-@
 
-% TODO check what is wrong here: different Chi-Square value ?!
 
-\section{Effects of Survey Design on Chi-Square Tests}
-
-<<>>=
+###################################################
+### code chunk number 30: SDaA_using_survey.Rnw:383-390
+###################################################
 	### Example 10.4
   hh2 <- rbind(c(238, 376),
                c(176, 210))
@@ -388,24 +306,11 @@ Figure 7.10 on p. 238 of Lohr (1999).
   colnames(hh2) <- c("computerYes", "computerNo")
   addmargins(hh2)
   chisq.test(hh2, correct = FALSE)  # OK
-@
 
-\section{Corrections to Chi-Square Tests}
 
-% from ?svychisq
-% 'svychisq' computes first and second-order Rao-Scott corrections
-% to the Pearson chisquared test, and two Wald-type tests.
-
-<<>>=
+###################################################
+### code chunk number 31: SDaA_using_survey.Rnw:399-400
+###################################################
 	### example 10.5
-@
 
 
-\chapter{Regression with Complex Survey Data} % Chapter 11
-
-\section{Model-Based Regression in Simple Random Samples}
-\section{Regression in Complex Surveys}
-
-\chapter{Other Topics in Sampling} % Chapter 12
-
-\end{document}
