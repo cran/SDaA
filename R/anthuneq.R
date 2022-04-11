@@ -16,6 +16,4 @@
 #' identification of criminals, \emph{Biometrika}, 1: 177--227.
 #' @references Lohr (1999). Sampling: Design and Analysis, Duxbury, p. TODO and
 #'   438.
-#' @export
-NULL
-
+"anthuneq"

@@ -15,5 +15,4 @@
 #'   Biological Conservation, 49: 241--254.
 #' @references Lohr (1999). Sampling: Design and Analysis, Duxbury, p. TODO and
 #'   443.
-#' @export
-NULL
+"otters"

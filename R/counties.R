@@ -27,5 +27,4 @@
 #' @source U.S. Bureau of Census, 1994
 #' @references Lohr (1999). Sampling: Design and Analysis, Duxbury, p. TODO and
 #'   440. 
-#' @export
-NULL
+"counties"

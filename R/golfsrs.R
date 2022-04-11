@@ -1,7 +1,7 @@
 #' Simple Random Sample of Golf Courses
 #' 
 #' Simple Random Sample (SRS) of 120 golf courses taken from 
-#'  the population of the Website www.golfcourse.com
+#'  the population of the (now defunct) Website www.golfcourse.com
 #' @name golfsrs
 #' @docType data
 #' @format Data frame with the following 16 variables: 
@@ -27,8 +27,7 @@
 #'   \item{pro}{Is a golf pro available? factor with levels \code{yes}
 #'     and \code{no}}
 #' }
-#' @source \url{http://www.golfcourse.com}
+#' @source The now defunct website golfcourse.com (\url{https://web.archive.org/web/19991108203827/http://golfcourse.com/})
 #' @references Lohr (1999). Sampling: Design and Analysis, Duxbury, p. TODO and
 #'   TODO.
-#' @export
-NULL
+"golfsrs"

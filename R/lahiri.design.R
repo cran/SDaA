@@ -11,6 +11,7 @@
 #' @references Lahiri, D. B. (1951). A method of sample selection 
 #'             providing unbiased ratio estimates, \emph{Bulletin of
 #'             the International Statistical Institute}, 33: 133 -- 140.
+#' @importFrom stats runif
 #' @export
 lahiri.design <- function(relsize, n, clnames = seq(along = relsize)){
   maxrel <- max(relsize)

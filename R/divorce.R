@@ -30,5 +30,4 @@
 #' @source National Center of Health Statistics (1987). TODO
 #' @references Lohr (1999). Sampling: Design and Analysis, Duxbury, p. TODO and
 #'   440. 
-#' @export
-NULL
+"divorce"

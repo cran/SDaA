@@ -32,8 +32,7 @@
 #'   \item{GMT23}{ozone reading at 23:00 GMT}
 #'   \item{GMT24}{ozone reading at 24:00 GMT}
 #' }
-#' @source Air Quality Information Centre: \url{www.aeat.co.uk}
+#' @source Air Quality Information Centre: retrieved from a now defunct URL (http://www.aeat.co.uk)
 #' @references Lohr (1999). Sampling: Design and Analysis, Duxbury, p. TODO and
 #'   443.
-#' @export
-NULL
+"ozone"

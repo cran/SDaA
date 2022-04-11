@@ -1,5 +1,4 @@
 ### R code from vignette source 'SDaA_using_survey.Rnw'
-### Encoding: UTF-8
 
 ###################################################
 ### code chunk number 1: config

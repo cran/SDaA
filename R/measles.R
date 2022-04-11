@@ -30,5 +30,4 @@
 #' vaccine, \emph{British Medical Journal}, 310, 1629--1632.
 #' @references Lohr (1999). Sampling: Design and Analysis, Duxbury, p. TODO and
 #'   442. 
-#' @export
-NULL
+"measles"

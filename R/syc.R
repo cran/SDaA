@@ -7,7 +7,8 @@
 #' survey are contained in the syc data frame.
 #' @name syc
 #' @docType data
-#' @format \describe{
+#' @format
+#' \describe{
 #'   \item{stratum}{stratum number}
 #'   \item{psu}{psu (facility) number}
 #'   \item{psusize}{number of eligible residents in psu}
@@ -17,7 +18,7 @@
 #'   \item{age}{age of resident}
 #'   \item{race}{race of resident: factor with levels \code{1} (white),
 #'      \code{2} (black), \code{3} (Asian/Pacific Islander),
-#'      \code{4} (American Indian, Aleut, Eskimo}, \code{5} (other)}
+#'      \code{4} (American Indian, Aleut, Eskimo), \code{5} (other)}
 #'   \item{ethnicty}{ethnicity; factor with levels \code{hispanic} and
 #'      \code{notHispanic}}
 #'   \item{educ}{highest grade before sent to correctional institution; factor
@@ -63,5 +64,4 @@
 #'   NCJ-130915, U.S. Department of Justice 1989.
 #' @references Lohr (1999). Sampling: Design and Analysis, Duxbury, p. 235--239 and
 #'   445.
-#' @export
-NULL
+"syc"

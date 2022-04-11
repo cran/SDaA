@@ -16,5 +16,4 @@
 #' }
 #' @references Lohr (1999). Sampling: Design and Analysis, Duxbury, p. TODO and
 #'   445.
-#' @export
-NULL
+"statepps"

@@ -11,5 +11,4 @@
 #' @source Jacoby and Handlin (1991). TODO
 #' @references Lohr (1999). Sampling: Design and Analysis, Duxbury, p. TODO and
 #'   442. 
-#' @export
-NULL
+"journal"

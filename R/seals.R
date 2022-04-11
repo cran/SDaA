@@ -16,5 +16,4 @@
 #' \emph{Polar Record}, 27: 223--228.   
 #' @references Lohr (1999). Sampling: Design and Analysis, Duxbury, p. TODO and
 #'   444. 
-#' @export
-NULL
+"seals"

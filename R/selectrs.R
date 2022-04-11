@@ -17,5 +17,4 @@
 #' observations from \code{agpop} into dataset \code{agsrs}.
 #' @references Lohr (1999). Sampling: Design and Analysis, Duxbury, p. 31--34 
 #' and 444. 
-#' @export
-NULL
+"selectrs"

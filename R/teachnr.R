@@ -21,5 +21,4 @@
 #' 
 #' Lohr (1999). Sampling: Design and Analysis, Duxbury, p. TODO and
 #'   446.
-#' @export
-NULL
+"teachnr"

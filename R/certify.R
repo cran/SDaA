@@ -34,7 +34,7 @@
 #'     \code{I} (in school), \code{R} (retired), \code{S} (self-employed), 
 #'     \code{U} (unemployed) and \code{O} (other)}
 #'   \item{workenv}{Primary work environment; factor with levels \code{A} (academia),
-#'     \code{G} (government), \code{I} (industry), \code{O} (other)
+#'     \code{G} (government), \code{I} (industry), \code{O} (other)}
 #'   \item{workact}{Primary work activity; factor with levels \code{C} (consultant), 
 #'     \code{E} (educator), \code{P} (practitioner), \code{R} (researcher), 
 #'     \code{S} (student) and \code{O} (other)}
@@ -44,5 +44,4 @@
 #' @references Lohr (1999). Sampling: Design and Analysis, Duxbury, p. TODO and
 #'   439. 
 #' \url{http://lib.stat.cmu.edu/asacert/certsurvey}
-#' @export
-NULL
+"certify"

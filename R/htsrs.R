@@ -9,5 +9,4 @@
 #' }
 #' @references Lohr (1999). Sampling: Design and Analysis, Duxbury, p. 230--234 and
 #'   442.
-#' @export
-NULL
+"htsrs"

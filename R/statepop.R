@@ -18,5 +18,4 @@
 #' @source City and Counties Book, 1994
 #' @references Lohr (1999). Sampling: Design and Analysis, Duxbury, p. 190  -- 192 and
 #'   444.
-#' @export
-NULL
+"statepop"

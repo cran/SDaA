@@ -22,5 +22,4 @@
 #' @source U.S. 1992 Census of Agriculture
 #' @references Lohr (1999). Sampling: Design and Analysis, Duxbury, p. TODO and
 #'   437.
-#' @export
-NULL
+"agsrs"
